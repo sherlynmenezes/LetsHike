@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SIgn Up"
-        android:id="@+id/SignUpButton2"
+        android:id="@+id/SignUpButton"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/loginButton"
         android:layout_alignStart="@+id/loginButton"/>
