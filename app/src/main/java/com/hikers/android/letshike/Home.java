@@ -38,7 +38,9 @@ public class Home extends ActionBarActivity {
         }
         else if(id == R.id.action_map){
             Log.d("map","insideactionmap");
-            openPreferredMapLocation();
+            Intent intent = new Intent(this,SelectedTrail.class);
+            startActivity(intent);
+            //openPreferredMapLocation();
         }
 
         return super.onOptionsItemSelected(item);

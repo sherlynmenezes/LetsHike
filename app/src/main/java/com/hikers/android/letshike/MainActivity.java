@@ -115,6 +115,10 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        else if(id==R.id.action_map){
+            Intent intent = new Intent(this,SelectedTrail.class);
+            startActivity(intent);
+        }
 
 
         return super.onOptionsItemSelected(item);

@@ -65,7 +65,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="or"
         android:id="@+id/textView2"
-        android:layout_above="@+id/SignUpButton2"
+        android:layout_above="@+id/SignUpButton"
         android:layout_centerHorizontal="true"/>
 
     <ImageView
