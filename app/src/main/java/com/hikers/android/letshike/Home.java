@@ -1,4 +1,4 @@
-package com.vismay.android.letshike;
+package com.hikers.android.letshike;
 
 import android.content.Intent;
 import android.net.Uri;

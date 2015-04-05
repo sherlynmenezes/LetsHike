@@ -1,8 +1,7 @@
-package com.vismay.android.letshike;
+package com.hikers.android.letshike;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;

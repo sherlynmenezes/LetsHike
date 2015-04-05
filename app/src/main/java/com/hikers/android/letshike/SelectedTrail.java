@@ -1,4 +1,4 @@
-package com.vismay.android.letshike;
+package com.hikers.android.letshike;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
