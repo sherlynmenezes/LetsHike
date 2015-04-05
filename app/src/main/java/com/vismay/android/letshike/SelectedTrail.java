@@ -1,27 +1,24 @@
 package com.vismay.android.letshike;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class Home extends ActionBarActivity {
+public class SelectedTrail extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_selected_trail);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_home, menu);
+        getMenuInflater().inflate(R.menu.menu_selected_trail, menu);
         return true;
     }
 
@@ -36,26 +33,7 @@ public class Home extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        else if(id == R.id.action_map){
-            Log.d("map","insideactionmap");
-            openPreferredMapLocation();
-        }
 
         return super.onOptionsItemSelected(item);
-    }
-    private void openPreferredMapLocation(){
-        Log.d("map", "insideMapMethod");
-        String posLat="59.915494";
-        String posLong="30.409456";
-//        String posLat = c.getString(COL_COORD_LAT);
-//        String posLong = c.getString(COL_COORD_LONG);
-        Uri geoLocation = Uri.parse("geo:" + posLat + "," + posLong);
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(geoLocation);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-
-            startActivity(intent);
-        }
     }
 }

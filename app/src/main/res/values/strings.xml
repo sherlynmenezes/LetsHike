@@ -10,4 +10,5 @@
     <string name="title_section1">tab1</string>
     <string name="title_section2">tab2</string>
     <string name="title_activity_home">Home</string>
+    <string name="title_activity_selected_trail">SelectedTrail</string>
 </resources>
