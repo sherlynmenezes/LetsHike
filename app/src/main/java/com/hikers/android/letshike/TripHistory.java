@@ -11,8 +11,8 @@ import android.view.View;
  */
 public class TripHistory extends ActionBarActivity {
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.list_of_own_trails);
     }
 
