@@ -4,17 +4,27 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 
 public class Home extends ActionBarActivity {
 
+    Button historyButton ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        historyButton=(Button)findViewById(R.id.historyButton);
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pastTrails(v);
+            }
+        });
     }
 
 
@@ -59,5 +69,11 @@ public class Home extends ActionBarActivity {
 
             startActivity(intent);
         }
+    }
+
+    public void pastTrails(View view)
+    {
+        Intent i = new Intent(this, TripHistory.class);
+        startActivityForResult(i, 1);
     }
 }
