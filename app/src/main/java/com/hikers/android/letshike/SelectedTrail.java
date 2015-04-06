@@ -1,5 +1,6 @@
 package com.hikers.android.letshike;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
@@ -51,7 +52,7 @@ public class SelectedTrail extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap map) {
         CameraUpdate center=
                 CameraUpdateFactory.newLatLng(new LatLng(37.35,-122.0));
-        CameraUpdate zoom= CameraUpdateFactory.zoomTo(8);
+        CameraUpdate zoom= CameraUpdateFactory.zoomTo(12);
 
         map.moveCamera(center);
         map.animateCamera(zoom);
@@ -104,6 +105,11 @@ public class SelectedTrail extends FragmentActivity implements OnMapReadyCallbac
         if (id == R.id.action_settings) {
             return true;
         }
+        else if(id==R.id.action_map){
+            Intent intent = new Intent(this,SelectedTrail.class);
+            startActivity(intent);
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
