@@ -1,4 +1,4 @@
-package com.hikers.android.letshike;
+package com.hikers.android.letshike.controllers;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.hikers.android.letshike.R;
 
 
 public class Home extends ActionBarActivity {

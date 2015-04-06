@@ -1,4 +1,4 @@
-package com.hikers.android.letshike;
+package com.hikers.android.letshike.controllers;
 
 import android.graphics.Color;
 import android.location.Location;
@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.hikers.android.letshike.R;
 
 
 public class SelectedTrail extends FragmentActivity implements OnMapReadyCallback{
