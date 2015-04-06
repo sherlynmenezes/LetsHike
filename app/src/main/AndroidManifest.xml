@@ -50,7 +50,7 @@
         </activity>
         <activity
             android:name="com.hikers.android.letshike.TripHistory"
-            android:label="@string/title_activity_selected_trail" >
+            android:label="TripHistory" >
         </activity>
     </application>
 
