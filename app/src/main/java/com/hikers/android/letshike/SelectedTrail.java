@@ -52,7 +52,7 @@ public class SelectedTrail extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap map) {
         CameraUpdate center=
                 CameraUpdateFactory.newLatLng(new LatLng(37.35,-122.0));
-        CameraUpdate zoom= CameraUpdateFactory.zoomTo(12);
+        CameraUpdate zoom= CameraUpdateFactory.zoomTo(10);
 
         map.moveCamera(center);
         map.animateCamera(zoom);
