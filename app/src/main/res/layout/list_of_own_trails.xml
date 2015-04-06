@@ -19,7 +19,15 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Visited Trails"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/imageView1"
+        android:layout_alignRight="@+id/listView"
+        android:textSize="35dp"
+        android:textColor="#ffffffff" />
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,16 +37,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@id/textView5"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Visited Trails"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/imageView1"
-        android:layout_alignRight="@+id/listView"
-        android:layout_alignEnd="@+id/listView"
-        android:textSize="35dp"
-        android:textColor="#ffffffff" />
+
 
     <!--<Button-->
         <!--android:layout_width="match_parent"-->

@@ -74,6 +74,6 @@ public class Home extends ActionBarActivity {
     public void pastTrails(View view)
     {
         Intent i = new Intent(this, TripHistory.class);
-        startActivityForResult(i, 1);
+        startActivity(i);
     }
 }
