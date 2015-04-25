@@ -1,9 +1,9 @@
-package com.hikers.android.letshike.controllers;
+package com.hikers.android.letshike;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,10 +16,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.hikers.android.letshike.R;
+//import com.hikers.android.letshike.Models.DatabaseManager;
+//import com.hikers.android.letshike.Models.DatabaseObject;
 
 
 public class SelectedTrail extends FragmentActivity implements OnMapReadyCallback{
@@ -35,6 +35,15 @@ public class SelectedTrail extends FragmentActivity implements OnMapReadyCallbac
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+//        DatabaseManager db = new DatabaseManager(this);
+//        List<DatabaseObject> K = db.getAllDatabaseObject();
+//        for (DatabaseObject cn : K) {
+//            point = new GeoPoint((int)(cn.getlat()*E6), (int)(cn.getlng()*E6));
+//            overlayitem = new OverlayItem(point, cn.getname(), cn.getinfo());
+//            itemizedOverlay.addOverlay(overlayitem);
+//            mapOverlays.add(itemizedOverlay);
+//        }
+
     }
 
 
@@ -43,7 +52,7 @@ public class SelectedTrail extends FragmentActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap map) {
         CameraUpdate center=
                 CameraUpdateFactory.newLatLng(new LatLng(37.35,-122.0));
-        CameraUpdate zoom= CameraUpdateFactory.zoomTo(8);
+        CameraUpdate zoom= CameraUpdateFactory.zoomTo(12);
 
         map.moveCamera(center);
         map.animateCamera(zoom);
@@ -69,6 +78,13 @@ public class SelectedTrail extends FragmentActivity implements OnMapReadyCallbac
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(37.35, -122.0))
                 .title("Hello world").icon(BitmapDescriptorFactory.fromResource(R.drawable.hiking)));
+//        map.addMarker(new MarkerOptions()
+//                .position(new LatLng(40.7127, 74.0059))
+//                .title("Hello world").icon(BitmapDescriptorFactory.fromResource(R.drawable.treking1)));
+//        map.addMarker(new MarkerOptions()
+//                .position(new LatLng(37.35, -122.2))
+//                .title("Hello world").icon(BitmapDescriptorFactory.fromResource(R.drawable.treking1)));
+
 
     }
     @Override
@@ -89,6 +105,11 @@ public class SelectedTrail extends FragmentActivity implements OnMapReadyCallbac
         if (id == R.id.action_settings) {
             return true;
         }
+        else if(id==R.id.action_map){
+            Intent intent = new Intent(this,SelectedTrail.class);
+            startActivity(intent);
+        }
+
 
         return super.onOptionsItemSelected(item);
     }

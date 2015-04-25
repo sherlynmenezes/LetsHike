@@ -29,7 +29,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // Parse.enableLocalDatastore(this);
+        //Parse.enableLocalDatastore(this);
+
         Parse.initialize(this, "Hw4MULqo65R0NHElRKs8ZMIEJjo8jHx8jUE3U31a", "zEMPRCWyMtGVhk477CKHz71rd2DtNlBTYciIiIXt");
 //        ParseObject testObject = new ParseObject("TestObject");
 //        testObject.put("foo", "bar");
@@ -62,11 +63,13 @@ public class MainActivity extends ActionBarActivity {
                     dialog.show();
                 } else {
                     setSupportProgressBarIndeterminateVisibility(true);
+
                     ParseUser.logInInBackground(username, password, new LogInCallback() {
                         public void done(ParseUser user, ParseException e) {
                             setSupportProgressBarIndeterminateVisibility(false);
                             Log.d(TAG, "mLoginButton Clicked" + user);
                             if (user != null) {
+
                                 // Hooray! The user is logged in.
                                 ParseAnalytics.trackAppOpened(getIntent());
                                 Log.d(TAG, "user is not null");
@@ -77,7 +80,10 @@ public class MainActivity extends ActionBarActivity {
 
                             } else {
                                 // Signup failed. Look at the ParseException to see what happened.
+
+
                                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
                                 builder.setMessage(e.getMessage());
                                 builder.setTitle("Error in SignIn!");
                                 builder.setPositiveButton(android.R.string.ok, null);
@@ -104,6 +110,7 @@ public class MainActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -112,6 +119,14 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(this,SelectedTrail.class);
             startActivity(intent);
         }
+
+
         return super.onOptionsItemSelected(item);
     }
+
+
 }
+
+
+
+

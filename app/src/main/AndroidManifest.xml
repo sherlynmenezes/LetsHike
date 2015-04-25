@@ -48,6 +48,10 @@
             android:name=".controllers.SelectedTrail"
             android:label="@string/title_activity_selected_trail" >
         </activity>
+        <activity
+            android:name="com.hikers.android.letshike.TripHistory"
+            android:label="TripHistory" >
+        </activity>
     </application>
 
 </manifest>
