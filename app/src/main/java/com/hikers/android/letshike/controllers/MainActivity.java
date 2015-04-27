@@ -1,5 +1,6 @@
-package com.hikers.android.letshike;
+package com.hikers.android.letshike.controllers;
 
+import com.hikers.android.letshike.R;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.hikers.android.letshike.SelectedTrail;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;

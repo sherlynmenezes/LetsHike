@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.hikers.android.letshike.R;
+import com.hikers.android.letshike.SelectedTrail;
+import com.hikers.android.letshike.TripHistory;
 
 
 public class Home extends ActionBarActivity {
