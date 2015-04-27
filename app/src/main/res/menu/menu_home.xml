@@ -9,4 +9,8 @@
     <item android:id="@+id/action_map"
           android:title="Map Location"
           app:showAsAction="never" />
+    <item  android:id="@+id/camera"
+           android:title="camera"
+           android:orderInCategory="100"
+           app:showAsAction="never"/>
 </menu>
