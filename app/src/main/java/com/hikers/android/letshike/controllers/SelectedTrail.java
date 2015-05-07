@@ -1,4 +1,4 @@
-package com.hikers.android.letshike;
+package com.hikers.android.letshike.controllers;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.hikers.android.letshike.R;
 //import com.hikers.android.letshike.Models.DatabaseManager;
 //import com.hikers.android.letshike.Models.DatabaseObject;
 

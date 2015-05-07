@@ -11,8 +11,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.hikers.android.letshike.R;
-import com.hikers.android.letshike.SelectedTrail;
-import com.hikers.android.letshike.TripHistory;
+import com.hikers.android.letshike.controllers.SelectedTrail;
 
 
 public class Home extends ActionBarActivity {
@@ -52,7 +51,7 @@ public class Home extends ActionBarActivity {
         }
         else if(id == R.id.action_map){
             Log.d("map","insideactionmap");
-            Intent intent = new Intent(this,SelectedTrail.class);
+            Intent intent = new Intent(this,OfflineMainActivity.class);
             startActivity(intent);
             //openPreferredMapLocation();
         }

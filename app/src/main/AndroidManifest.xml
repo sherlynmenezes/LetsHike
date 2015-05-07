@@ -26,7 +26,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".controllers.MainActivity2"
+            android:name=".controllers.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +51,7 @@
             android:label="@string/title_activity_selected_trail" >
         </activity>
         <activity
-            android:name=".TripHistory"
+            android:name=".controllers.TripHistory"
             android:label="TripHistory" >
         </activity>
         <activity
