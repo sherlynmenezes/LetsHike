@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.hikers.android.letshike.SelectedTrail;
+//import com.hikers.android.letshike.controllers.SelectedTrail;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
@@ -118,7 +118,7 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         else if(id==R.id.action_map){
-            Intent intent = new Intent(this,SelectedTrail.class);
+            Intent intent = new Intent(this,OfflineMainActivity.class);
             startActivity(intent);
         }
 

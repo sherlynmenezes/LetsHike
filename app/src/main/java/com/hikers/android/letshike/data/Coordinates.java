@@ -4,9 +4,9 @@ import android.support.v7.app.ActionBarActivity;
 
 
 public class Coordinates extends ActionBarActivity {
-    Double longitude = null;
-    Double latitude = null;
-    public Coordinates(Double d,Double dd){
+    double longitude = 0.0;
+    double latitude = 0.0;
+    public Coordinates(double d,double dd){
         longitude=d;
         latitude=dd;
     }
@@ -18,7 +18,7 @@ public class Coordinates extends ActionBarActivity {
         this.longitude =longitude;
     }
 
-   public Double get_longitude()
+   public double get_longitude()
     {
         return longitude;
     }
@@ -28,7 +28,7 @@ public class Coordinates extends ActionBarActivity {
         this.latitude =latitude;
     }
 
-  public  Double get_latitude()
+  public  double get_latitude()
     {
         return latitude;
     }

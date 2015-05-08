@@ -60,8 +60,8 @@ public class Coordinates_Database extends SQLiteOpenHelper {
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             int id = cursor.getInt(0);
             coordinatesObjList.add(new Coordinates(cursor.getDouble(1),cursor.getDouble(2)));
-            Log.v("LONGITUDE", "" + (cursor.getInt(1)));
-            Log.v("Latitude", ""+(cursor.getInt(2)));
+            Log.v("LONGITUDE", "" + (cursor.getDouble(1)));
+            Log.v("Latitude", ""+(cursor.getDouble(2)));
         }
 
 //        Log.v("Count", ""+count);

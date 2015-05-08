@@ -22,6 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.hikers.android.letshike.R;
 import com.hikers.android.letshike.data.Coordinates;
@@ -77,7 +78,7 @@ public class OfflineMainActivity extends FragmentActivity implements
                 .addOnConnectionFailedListener(this)
                 .build();
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_offline_gps);
         SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         googleMap = fm.getMap();
@@ -168,44 +169,50 @@ public class OfflineMainActivity extends FragmentActivity implements
         // you can safely comment the following four lines but for this info
 
 
-        LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-        Coordinates_Database cd=new Coordinates_Database(this);
-        ArrayList<Coordinates> coordinates=new ArrayList<>();
-        coordinates.addAll(cd.Coords());
-        PolylineOptions rectLine = new PolylineOptions().width(8).color(Color.RED);
-        rectLine.add(new LatLng(coordinates.get(0).get_latitude(), coordinates.get(0).get_longitude()));
 
-        for(Coordinates coordinates1:coordinates){
-                        rectLine.add(new LatLng(coordinates1.get_latitude(),coordinates1.get_longitude()));
-            googleMap.addPolyline(rectLine);
+        Coordinates_Database cd=new Coordinates_Database(this);
+        ArrayList<Coordinates> coordinates=new ArrayList<>(cd.Coords());
+       // coordinates.addAll(cd.Coords());
+        int count =1 , countline=1;
+        for(Coordinates c : coordinates)
+        {
+            LatLng currentLatLng = new LatLng(c.get_latitude(), c.get_longitude());
+            count++;
+            Log.v("long", ""+c.get_latitude()+c.get_longitude());
+            options.position(currentLatLng);
+            Marker mapMarker = googleMap.addMarker(options);
+            mapMarker.setTitle(Integer.toString(count));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 7));
+            Polyline line = googleMap.addPolyline(new PolylineOptions().add(new LatLng(c.get_latitude(),c.get_longitude())));
         }
 
+        for(int i=0;i<coordinates.size()-1;i++)
+        {
+            if(countline<coordinates.size()-1)
+            { Polyline line = googleMap.addPolyline(new PolylineOptions()
+                    .add(new LatLng(coordinates.get(i).get_latitude(), coordinates.get(i).get_longitude())
+                    ,new LatLng(coordinates.get(countline).get_latitude(),coordinates.get(countline).get_longitude()))
+            .width(5)
+            .color(Color.RED));
+                countline++;
+            }
 
-//                .add(new LatLng(37.63, -121.99))
-//                .add(new LatLng(37.35, -122.0))
-//                .add(new LatLng(37.35, -122.0))
-//                .add(new LatLng(37.35, -122.0))
-//                .add(new LatLng(37.35, -122.0))
-//                .add(new LatLng(37.35, -122.0))
-
-
-
-
+        }
+//        PolylineOptions rectLine = new PolylineOptions().width(8).color(Color.RED);
+//        rectLine.add(new LatLng(coordinates.get(0).get_latitude(), coordinates.get(0).get_longitude()));
 //
-//                        PolylineOptions rectLine = new PolylineOptions().width(8).color(Color.RED);
-//                        rectLine.add(my_latlong,directionPoint.get(ii));
-//                        Polyline polyline=map.addPolyline(rectLine);
-//                        polylines.add(polyline);
+//        for(Coordinates coordinates1:coordinates){
+//                        rectLine.add(new LatLng(coordinates1.get_latitude(),coordinates1.get_longitude()));
+//            googleMap.addPolyline(rectLine);
+//        }
 
-
-             options.position(currentLatLng);
-             Marker mapMarker = googleMap.addMarker(options);
+//        options.position(currentLatLng);
+//        Marker mapMarker = googleMap.addMarker(options);
         long atTime = mCurrentLocation.getTime();
         mLastUpdateTime = DateFormat.getTimeInstance().format(new Date(atTime));
-        mapMarker.setTitle(Double.toString(mCurrentLocation.getLatitude()));
+//        mapMarker.setTitle(Double.toString(mCurrentLocation.getLatitude()));
         Log.d(TAG, "Marker added.............................");
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng,
-                13));
+
         Log.d(TAG, "Zoom done.............................");
     }
 
