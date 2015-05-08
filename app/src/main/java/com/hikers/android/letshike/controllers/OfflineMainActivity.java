@@ -143,6 +143,7 @@ public class OfflineMainActivity extends FragmentActivity implements
         Log.v("**** LONGITUDE ****", Double.toString(mCurrentLocation.getLongitude()));
         Coordinates coord_latLong = new Coordinates(mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude());
         cd.insert_coord(coord_latLong);
+        //dummy values
 //        cd.insert_coord(new Coordinates(40.69430, -73.98530));
 //        cd.insert_coord(new Coordinates(40.69435,-73.98535));
 //        cd.insert_coord(new Coordinates(40.69440,-73.98540));
