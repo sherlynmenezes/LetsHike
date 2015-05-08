@@ -141,16 +141,18 @@ public class OfflineMainActivity extends FragmentActivity implements
         //Change
         Log.v("**** LATITUDE ****", Double.toString(mCurrentLocation.getLatitude()));
         Log.v("**** LONGITUDE ****", Double.toString(mCurrentLocation.getLongitude()));
-        cd.insert_coord(new Coordinates(40.70, -73.00));
-        cd.insert_coord(new Coordinates(40.72,-73.02));
-        cd.insert_coord(new Coordinates(40.74,-73.04));
-        cd.insert_coord(new Coordinates(40.76,-73.06));
-        cd.insert_coord(new Coordinates(40.78,-73.08));
-        cd.insert_coord(new Coordinates(40.80,-73.10));
-        cd.insert_coord(new Coordinates(40.82,-73.12));
-        cd.insert_coord(new Coordinates(40.84,-73.14));
-        cd.insert_coord(new Coordinates(40.85,-73.16));
-        cd.insert_coord(new Coordinates(40.86,-73.18));
+        Coordinates coord_latLong = new Coordinates(mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude());
+        cd.insert_coord(coord_latLong);
+//        cd.insert_coord(new Coordinates(40.69430, -73.98530));
+//        cd.insert_coord(new Coordinates(40.69435,-73.98535));
+//        cd.insert_coord(new Coordinates(40.69440,-73.98540));
+//        cd.insert_coord(new Coordinates(40.69445,-73.98545));
+//        cd.insert_coord(new Coordinates(40.69450,-73.98550));
+//        cd.insert_coord(new Coordinates(40.69455,-73.98555));
+//        cd.insert_coord(new Coordinates(40.69460,-73.98560));
+//        cd.insert_coord(new Coordinates(40.69465,-73.98565));
+//        cd.insert_coord(new Coordinates(40.69470,-73.98570));
+//        cd.insert_coord(new Coordinates(40.69475,-73.98575));
 
 
 
@@ -177,18 +179,18 @@ public class OfflineMainActivity extends FragmentActivity implements
         for(Coordinates c : coordinates)
         {
             LatLng currentLatLng = new LatLng(c.get_latitude(), c.get_longitude());
-            count++;
+           // count++;
             Log.v("long", ""+c.get_latitude()+c.get_longitude());
             options.position(currentLatLng);
             Marker mapMarker = googleMap.addMarker(options);
-            mapMarker.setTitle(Integer.toString(count));
+            mapMarker.setTitle(Double.toString(c.get_latitude()));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 7));
             Polyline line = googleMap.addPolyline(new PolylineOptions().add(new LatLng(c.get_latitude(),c.get_longitude())));
         }
 
         for(int i=0;i<coordinates.size()-1;i++)
         {
-            if(countline<coordinates.size()-1)
+            if(countline<coordinates.size())
             { Polyline line = googleMap.addPolyline(new PolylineOptions()
                     .add(new LatLng(coordinates.get(i).get_latitude(), coordinates.get(i).get_longitude())
                     ,new LatLng(coordinates.get(countline).get_latitude(),coordinates.get(countline).get_longitude()))

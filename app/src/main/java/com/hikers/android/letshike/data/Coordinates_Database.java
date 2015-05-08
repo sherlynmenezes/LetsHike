@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by Neha on 5/6/2015.
  */
 public class Coordinates_Database extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 7;
+    private static final int DB_VERSION = 14;
     private static final String DB_NAME = "Coordinates";
 
     private static final String COORDINATES = "coords";
@@ -28,8 +28,8 @@ public class Coordinates_Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + COORDINATES + "(" + ID
-                + " integer primary key autoincrement, " + LONGITUDE
-                + " double  , " + LATTIUDE + " double)");
+                + " integer primary key autoincrement, " + LATTIUDE
+                + " double  , " + LONGITUDE + " double)");
 
     }
 

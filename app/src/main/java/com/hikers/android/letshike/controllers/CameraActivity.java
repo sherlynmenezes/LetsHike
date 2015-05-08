@@ -246,22 +246,7 @@ public class CameraActivity extends ActionBarActivity {
                         "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
                         .show();
             }
-//        } else if (requestCode == CAMERA_CAPTURE_VIDEO_REQUEST_CODE) {
-//            if (resultCode == RESULT_OK) {
-//                // video successfully recorded
-//                // preview the recorded video
-//                previewVideo();
-//            } else if (resultCode == RESULT_CANCELED) {
-//                // user cancelled recording
-//                Toast.makeText(getApplicationContext(),
-//                        "User cancelled video recording", Toast.LENGTH_SHORT)
-//                        .show();
-//            } else {
-//                // failed to record video
-//                Toast.makeText(getApplicationContext(),
-//                        "Sorry! Failed to record video", Toast.LENGTH_SHORT)
-//                        .show();
-//            }
+
         }
     }
 
