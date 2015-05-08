@@ -17,6 +17,7 @@ import java.util.ArrayList;
  * Created by Neha on 4/6/2015.
  */
 public class TripHistory extends ActionBarActivity{
+        String a;
         ArrayAdapter<String> adapter = null;
         ListView mListView;
     @Override
