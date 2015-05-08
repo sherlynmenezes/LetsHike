@@ -26,4 +26,5 @@
     </array>
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="title_activity_camera">CameraActivity</string>
+    <string name="title_activity_geotag">GeotagActivity</string>
 </resources>

@@ -59,8 +59,13 @@
             android:name=".controllers.CameraActivity"
             android:label="@string/title_activity_camera" >
         </activity>
-        <activity android:name=".controllers.OfflineMainActivity"
-            android:label="OfflineMainActivity"/>
+        <activity
+            android:name=".controllers.OfflineMainActivity"
+            android:label="OfflineMainActivity" />
+        <activity
+            android:name=".controllers.GeotagActivity"
+            android:label="@string/title_activity_geotag" >
+        </activity>
     </application>
 
 </manifest>
