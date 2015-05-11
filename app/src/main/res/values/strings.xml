@@ -27,5 +27,10 @@
     <string name="desc_list_item_icon">Item Icon</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="title_activity_geotag">GeotagActivity</string>
-    <string name="title_activity_loading_screen">LoadingScreen</string>
+    <string name="distance">Distance</string>
+    <string name="steps">Steps</string>
+    <string name="startTime">Start Time</string>
+    <string name="endTime">End Time</string>
+    <string name="calories">Calories</string>
+    <string name="activity_hike_stats">activity Hike Stats</string>
 </resources>

@@ -74,6 +74,18 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true" />
 
+        <TextView
+            android:id="@+id/visited_trial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/textView4"
+            android:textStyle="italic"
+            android:text="trail"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:textColor="#FF0000"
+            />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
