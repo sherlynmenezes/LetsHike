@@ -1,0 +1,138 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tracker_id"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#C6E2FF"
+    android:padding="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hike Stats"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/hiking_stats"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        android:padding="10dp">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:background="#87CEFA">
+            <TextView
+                android:id="@+id/distance"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+
+                android:layout_marginRight="6dip"
+                android:text="@string/distance" />
+            <TextView
+                android:id="@+id/steps"
+                android:text="@string/steps"
+                android:textSize="15dp"
+                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:enabled="true" />
+            <TextView
+                android:id="@+id/startTime"
+                android:text="@string/startTime"
+                android:textSize="15dp"
+                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:enabled="true" />
+            <TextView
+                android:id="@+id/endTime"
+                android:text="@string/endTime"
+                android:textSize="15dp"
+                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:enabled="true" />
+            <TextView
+                android:id="@+id/calories"
+                android:text="@string/calories"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="6dip"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:background="#B0E2FF">
+            <TextView
+                android:id="@+id/distanceVal"
+                android:text="3.6"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                android:gravity="right" />
+            <TextView
+                android:id="@+id/stepsVal"
+                android:text="2200"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                android:gravity="right" />
+            <TextView
+                android:text="10:16:53"
+                android:id="@+id/starttimeVal"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                android:gravity="right" />
+            <TextView
+                android:text="11:19:24"
+                android:id="@+id/endtimeVal"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                android:gravity="right" />
+            <TextView
+                android:text="323.44"
+                android:id="@+id/caloriesVal"
+                android:textSize="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+
+                android:gravity="right" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
