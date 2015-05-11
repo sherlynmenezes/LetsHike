@@ -3,6 +3,10 @@ package com.hikers.android.letshike.controllers;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.hardware.Camera;
 import android.location.Location;
 import android.location.LocationManager;
 import android.media.ExifInterface;
@@ -19,8 +23,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.hikers.android.letshike.R;
-import com.hikers.android.letshike.controllers.SelectedTrail;
+import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -28,7 +37,9 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class Home extends ActionBarActivity {
+public class Home extends ActionBarActivity implements Camera.PictureCallback{
+    private static final String TAG = Home.class.getSimpleName();
+    public ParseFile photoFile;
 
     // Activity request codes
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
@@ -54,6 +65,20 @@ public class Home extends ActionBarActivity {
                 pastTrails(v);
             }
         });
+        ParseAnalytics.trackAppOpened(getIntent());
+        Log.d(TAG,"MAIn");
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // do stuff with the user
+            Log.i(TAG,currentUser.getUsername());
+        } else {
+            // show the signup or login screen
+            Intent intent = new Intent(this,MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+
     }
 
 
@@ -81,10 +106,18 @@ public class Home extends ActionBarActivity {
             startActivity(intent);
             //openPreferredMapLocation();
         }
-
+        else if (id == R.id.logout){
+            ParseUser.logOut();
+            Intent intent = new Intent(this,MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
         else if(id == R.id.action_camera)
         {
-            captureImage();
+            Intent intent = new Intent(this,CameraActivity.class);
+            startActivity(intent);
+            //captureImage();
         }
 
         return super.onOptionsItemSelected(item);
@@ -114,6 +147,10 @@ public class Home extends ActionBarActivity {
     //******Camera part
 
     private void captureImage() {
+
+
+
+
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
@@ -259,5 +296,49 @@ public class Home extends ActionBarActivity {
 //            }
         }
     }
+    private void saveScaledPhoto(byte[] data) {
 
+        // Resize photo from camera byte array
+        Bitmap mealImage = BitmapFactory.decodeByteArray(data, 0, data.length);
+        Bitmap mealImageScaled = Bitmap.createScaledBitmap(mealImage, 200, 200
+                * mealImage.getHeight() / mealImage.getWidth(), false);
+
+        // Override Android default landscape orientation and save portrait
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+        Bitmap rotatedScaledMealImage = Bitmap.createBitmap(mealImageScaled, 0,
+                0, mealImageScaled.getWidth(), mealImageScaled.getHeight(),
+                matrix, true);
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        rotatedScaledMealImage.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+
+        byte[] scaledData = bos.toByteArray();
+
+        // Save the scaled image to Parse
+        photoFile = new ParseFile("meal_photo.jpg", scaledData);
+        photoFile.saveInBackground(new SaveCallback() {
+
+            public void done(ParseException e) {
+                if (e != null) {
+                    Toast.makeText(getApplicationContext(),
+                            "Error saving: " + e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    addPhotoToMealAndReturn(photoFile);
+                }
+            }
+        });
+    }
+
+    private void addPhotoToMealAndReturn(ParseFile photoFile) {
+        Trip trip = new Trip();
+        trip.setPhotoFile(photoFile);
+    }
+
+    @Override
+    public void onPictureTaken(byte[] data, Camera camera) {
+        Log.d("photo","inside onPicture");
+        saveScaledPhoto(data);
+    }
 }

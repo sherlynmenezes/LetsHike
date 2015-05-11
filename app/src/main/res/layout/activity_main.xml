@@ -73,5 +73,12 @@
         android:layout_toRightOf="@+id/loginButton"
         android:layout_toEndOf="@+id/loginButton" />
 
-
+    <CheckBox
+        android:id="@+id/saveLoginCheckBox"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/loginButton"
+        android:text="Save Login?"
+        android:textColor="#FFF" />
 </RelativeLayout>
