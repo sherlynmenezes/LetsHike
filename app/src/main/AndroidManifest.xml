@@ -73,14 +73,12 @@
             android:name=".controllers.LoadingScreen"
             android:label="title_activity_loading_screen" >
         </activity>
-        <activity
-            android:name=".controllers.PhotoSelectionActivity"
-            android:label="activity_photo_selection" >
-        </activity>
-        <activity
-            android:name=".controllers.PhotoDisplay"
-            android:label="geotag_info_window" >
-        </activity>
+        <activity android:name=".controllers.Hike_Stats"
+                  android:label="Hike_Stats"/>
+        <activity android:name=".controllers.Trail_Details"
+                  android:label="Trail_Details"/>
+        <activity android:name=".controllers.PhotoSelectionActivity"
+                  android:label="PhotoSelection"/>
     </application>
 
 </manifest>

@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LetsHike.iml" filepath="$PROJECT_DIR$/LetsHike.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DatastoreBackend/DatastoreBackend.iml" filepath="$PROJECT_DIR$/DatastoreBackend/DatastoreBackend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DatastoreBackend/DatastoreBackend.iml" filepath="$PROJECT_DIR$/DatastoreBackend/DatastoreBackend.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/new.iml" filepath="$PROJECT_DIR$/new.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-backend/server-backend.iml" filepath="$PROJECT_DIR$/server-backend/server-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-backend/server-backend.iml" filepath="$PROJECT_DIR$/server-backend/server-backend.iml" />
     </modules>
   </component>
 </project>
-

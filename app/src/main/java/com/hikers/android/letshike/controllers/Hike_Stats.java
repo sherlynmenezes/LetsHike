@@ -23,10 +23,13 @@ public class Hike_Stats extends Activity {
         Intent intent = getIntent();
 
         Bundle b = getIntent().getExtras();
+        String distance = b.getString("distance");
         String step = b.getString("steps");
         String calories = b.getString("calories");
         String startTime = b.getString("startTime");
         String endTime = b.getString("endTime");
+        TextView dist = (TextView)findViewById(R.id.distanceVal);
+        dist.setText(distance);
         TextView stepVal = (TextView)findViewById(R.id.stepsVal);
         stepVal.setText(step);
         TextView calVal = (TextView)findViewById(R.id.caloriesVal);
@@ -40,12 +43,12 @@ public class Hike_Stats extends Activity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_hike__stats, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu., menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

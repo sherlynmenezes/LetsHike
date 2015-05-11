@@ -5,7 +5,7 @@
         android:id="@+id/badge"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/flower"
+        android:src="@drawable/abc_textfield_search_default_mtrl_alpha"
         android:layout_marginLeft="3dp"
         android:scaleType="center"/>
 

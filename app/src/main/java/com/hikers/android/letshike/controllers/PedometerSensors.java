@@ -81,6 +81,8 @@ public class PedometerSensors extends Service implements SensorEventListener {
         @Override
         public void run() {
             // TODO Auto-generated method stub
+
+            startStats();
             for(int i=0; i<10; i++){
                 try {
                     Thread.sleep(5000);
@@ -116,21 +118,21 @@ public class PedometerSensors extends Service implements SensorEventListener {
                 .getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
     }
 
-    public void startStats(View view){
+    public void startStats(){
 
-        View v = view.getRootView();
-        v.setDrawingCacheEnabled(true);
-        Bitmap b = v.getDrawingCache();
+       // View v = view.getRootView();
+//        v.setDrawingCacheEnabled(true);
+//        Bitmap b = v.getDrawingCache();
         String extr = Environment.getExternalStorageDirectory().toString();
         File myPath = new File(extr, "hike.jpg");
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(myPath);
-            b.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//            b.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
-            MediaStore.Images.Media.insertImage( getContentResolver(), b,
-                    "Screen", "screen");
+  //          MediaStore.Images.Media.insertImage( getContentResolver(), b,
+    //                "Screen", "screen");
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

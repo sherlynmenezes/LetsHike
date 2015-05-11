@@ -19,7 +19,11 @@ import android.view.View;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hikers.android.letshike.R;
@@ -33,6 +37,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -40,7 +45,7 @@ import java.util.Locale;
 public class Home extends ActionBarActivity implements Camera.PictureCallback{
     private static final String TAG = Home.class.getSimpleName();
     public ParseFile photoFile;
-
+    ListView trail_list;
     // Activity request codes
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     // private static final int CAMERA_CAPTURE_VIDEO_REQUEST_CODE = 200;
@@ -52,12 +57,32 @@ public class Home extends ActionBarActivity implements Camera.PictureCallback{
 
     private Uri fileUri; // file url to store image/video
 
+    ArrayAdapter<String> adapter = null;
 
     Button historyButton ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        trail_list=(ListView)findViewById(R.id.listView2);
+        ArrayList<String> trails=new ArrayList<String>();
+        ArrayList<String> mTripTitles=new ArrayList<>();
+        mTripTitles.add("California trail");
+        mTripTitles.add("bayridge");
+        mTripTitles.add("queens");
+        mTripTitles.add("somethinsg");
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mTripTitles);
+        trail_list.setAdapter(adapter);
+        trail_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+             Intent intent = new Intent(Home.this,Trail_Details.class);
+                startActivity(intent);
+
+            }
+        });
+
         historyButton=(Button)findViewById(R.id.historyButton);
         historyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +90,7 @@ public class Home extends ActionBarActivity implements Camera.PictureCallback{
                 pastTrails(v);
             }
         });
-        ParseAnalytics.trackAppOpened(getIntent());
+//        ParseAnalytics.trackAppOpened(getIntent());
         Log.d(TAG,"MAIn");
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {

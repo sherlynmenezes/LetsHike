@@ -57,12 +57,12 @@ import java.util.Locale;
 public class OfflineMainActivity extends FragmentActivity implements
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
-
+        GoogleApiClient.OnConnectionFailedListener,SensorEventListener {
 
     //Pedometer Fields
-
+    private double sum = 0;
     private int steps;
+    private int counter=0;
     private float distance;
     private double calories;
     Time startTime;
@@ -95,13 +95,6 @@ public class OfflineMainActivity extends FragmentActivity implements
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("destroy","destroyed");
-  //      Coordinates_Database.onUpgrade
-    }
-
     Location mCurrentLocation;
     String mLastUpdateTime;
     GoogleMap googleMap;
@@ -120,7 +113,24 @@ public class OfflineMainActivity extends FragmentActivity implements
 
         setContentView(R.layout.activity_main_offline_gps);
         textView = (TextView) findViewById(R.id.steps_textview);
+        Button bStop = (Button)findViewById(R.id.hike_stats);
 
+        startTime = new Time(Time.getCurrentTimezone());
+        startTime.setToNow();
+
+        mSensorManager = (SensorManager)
+                getSystemService(Context.SENSOR_SERVICE);
+        mStepCounterSensor = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        mStepDetectorSensor = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+
+        bStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startStats(v);
+            }
+        });
         Button photo = (Button)findViewById(R.id.photo);
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,23 +140,17 @@ public class OfflineMainActivity extends FragmentActivity implements
             }
         });
 
-        Button bStop = (Button)findViewById(R.id.stop);
-        bStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pedo.startStats(v);
-            }
-        });
 
-        Button pedometer = (Button) findViewById(R.id.pedometer);
-        pedometer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //call_pedometer();
-                Intent service = new Intent(getApplicationContext(), PedometerSensors.class);
-                startService(service);
-                 }
-            });
+//
+//        Button pedometer = (Button) findViewById(R.id.pedometer);
+//        pedometer.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //call_pedometer();
+//                    Intent service = new Intent(getApplicationContext(), PedometerSensors.class);
+//                startService(service);
+//                 }
+//            });
 
         Button camera = (Button) findViewById(R.id.camera);
         camera.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +179,77 @@ public class OfflineMainActivity extends FragmentActivity implements
         googleMap = fm.getMap();
         googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        Sensor sensor = event.sensor;
+        float[] values = event.values;
+        int value = -1;
+
+        if (values.length > 0) {
+            value = (int) values[0];
+        }
+
+        if (sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+            textView.setText("Step Counter Detected : " + counter++);
+        }
+//        else if (sensor.getType() == Sensor.TYPE_STEP_DETECTOR) {
+//            // For test only. Only allowed value is 1.0 i.e. for step taken
+//            textView.setText("Step Detector Detected : " + counter);
+//        }
+        steps = counter;
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+
+    private void startStats(View view) {
+
+//        }
+        View v = view.getRootView();
+        v.setDrawingCacheEnabled(true);
+        Bitmap b = v.getDrawingCache();
+        String extr = Environment.getExternalStorageDirectory().toString();
+        File myPath = new File(extr, "hike.jpg");
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(myPath);
+            b.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+            MediaStore.Images.Media.insertImage( getContentResolver(), b,
+                    "Screen", "screen");
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        int weight = 175;
+        int stepForAMile = 2200;
+        double caloriesPerMile, conversionFactor;
+        caloriesPerMile = 0.57 * (double)weight;
+        conversionFactor=caloriesPerMile/stepForAMile;
+        calories = steps * conversionFactor;
+
+        endTime = new Time(Time.getCurrentTimezone());
+        endTime.setToNow();
+
+        duration=new Time();
+        // duration=startTime-endTime;
+
+
+        Intent intent = new Intent(this, Hike_Stats.class);
+        intent.putExtra("steps", steps+"");
+        intent.putExtra("calories", calories+"");
+        intent.putExtra("startTime",startTime.format("%k:%M:%S"));
+        intent.putExtra("endTime",endTime.format("%k:%M:%S"));
+        intent.putExtra("distance",sum+"");
+        startActivity(intent);
+    }
 
     @Override
     public void onStart() {
@@ -192,8 +267,8 @@ public class OfflineMainActivity extends FragmentActivity implements
         Log.d(TAG, "onStop fired ..............");
         mGoogleApiClient.disconnect();
         Log.d(TAG, "isConnected ...............: " + mGoogleApiClient.isConnected());
-//        mSensorManager.unregisterListener(this, mStepCounterSensor);
-//        mSensorManager.unregisterListener(this, mStepDetectorSensor);
+        mSensorManager.unregisterListener((SensorEventListener) this, mStepCounterSensor);
+        mSensorManager.unregisterListener((SensorEventListener) this, mStepDetectorSensor);
 
     }
 
@@ -257,9 +332,17 @@ public class OfflineMainActivity extends FragmentActivity implements
         ArrayList<Coordinates> coordinates=new ArrayList<>(cd.Coords());
 
         int count =1 , countline=1;
+        double distance=0;
+        Location locB=null,locA=null;
         for(Coordinates c : coordinates)
         {
             LatLng currentLatLng = new LatLng(c.get_latitude(), c.get_longitude());
+            locA = new Location("LocA");
+            locA.setLatitude(c.get_latitude());
+            locA.setLongitude(c.get_longitude());
+            if(locB!=null)
+                distance = locA.distanceTo(locB);
+            sum=sum+distance;
            // count++;
             Log.v("long", ""+c.get_latitude()+c.get_longitude());
             options.position(currentLatLng);
@@ -267,6 +350,8 @@ public class OfflineMainActivity extends FragmentActivity implements
             mapMarker.setTitle(Double.toString(c.get_latitude()));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 7));
             Polyline line = googleMap.addPolyline(new PolylineOptions().add(new LatLng(c.get_latitude(),c.get_longitude())));
+            locB = new Location("LocB");
+            locB=locA;
         }
 
         for(int i=0;i<coordinates.size()-1;i++)
@@ -309,6 +394,15 @@ public class OfflineMainActivity extends FragmentActivity implements
             startLocationUpdates();
             Log.d(TAG, "Location update resumed .....................");
         }
+
+
+        mSensorManager.registerListener((SensorEventListener) this, mStepCounterSensor,
+
+                SensorManager.SENSOR_DELAY_FASTEST);
+        mSensorManager.registerListener((SensorEventListener) this, mStepDetectorSensor,
+
+                SensorManager.SENSOR_DELAY_FASTEST);
+
 //        mSensorManager.registerListener(this, mStepCounterSensor,SensorManager.SENSOR_DELAY_FASTEST);
 //        mSensorManager.registerListener(this, mStepDetectorSensor,SensorManager.SENSOR_DELAY_FASTEST);
     }
@@ -318,11 +412,8 @@ public class OfflineMainActivity extends FragmentActivity implements
 
     private void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
         fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-
         // start the image capture Intent
         startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
     }
@@ -527,7 +618,7 @@ public class OfflineMainActivity extends FragmentActivity implements
 //    }
 //
 //    @Override
-//    public void onSensorChanged(SensorEvent event) {
+//    public void orChanged(SensorEvent event) {
 //        Sensor sensor = event.sensor;
 //        float[] values = event.values;
 //        int value = -1;
@@ -578,5 +669,12 @@ public class OfflineMainActivity extends FragmentActivity implements
 //        mStepDetectorSensor = mSensorManager
 //                .getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
 //    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("destroy","destroyed");
+        //      Coordinates_Database.onUpgrade
+    }
 
 }
