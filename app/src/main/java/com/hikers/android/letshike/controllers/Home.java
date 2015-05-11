@@ -122,10 +122,10 @@ public class Home extends ActionBarActivity implements Camera.PictureCallback{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if(id == R.id.action_map){
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        if(id == R.id.action_map){
             Log.d("map","insideactionmap");
             Intent intent = new Intent(this,OfflineMainActivity.class);
             startActivity(intent);

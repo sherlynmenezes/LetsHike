@@ -185,6 +185,7 @@ public class OfflineMainActivity extends FragmentActivity implements
                 .findFragmentById(R.id.map);
         googleMap = fm.getMap();
         googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
     }
     @Override
     public void onSensorChanged(SensorEvent event) {

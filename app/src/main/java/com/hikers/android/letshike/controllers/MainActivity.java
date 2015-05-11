@@ -45,15 +45,12 @@ public class MainActivity extends ActionBarActivity {
         ParseObject.registerSubclass(Trip.class);
         Parse.initialize(this, "Hw4MULqo65R0NHElRKs8ZMIEJjo8jHx8jUE3U31a", "zEMPRCWyMtGVhk477CKHz71rd2DtNlBTYciIiIXt");
 //        ParseUser.enableRevocableSessionInBackground();
-        ParseObject testObject = new ParseObject("TestObject");
-        ParseObject testtest = new ParseObject("testtest");
-        testtest.put("dfsf","dsfsdf");
-        testtest.saveInBackground();
-
-        testObject.put("foo", "bar");
-        testObject.put("latitude", 72.00033);
+//        ParseObject testObject = new ParseObject("TestObject");
 //
-        testObject.saveInBackground();
+//        testObject.put("foo", "bar");
+//        testObject.put("latitude", 72.00033);
+//
+        //testObject.saveInBackground();
 
         mSignUpButton = (Button)findViewById(R.id.SignUpButton);
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
@@ -174,10 +171,10 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if(id==R.id.action_map){
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        if(id==R.id.action_map){
             Intent intent = new Intent(this,OfflineMainActivity.class);
             startActivity(intent);
         }

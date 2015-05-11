@@ -103,10 +103,10 @@ public class SelectedTrail extends FragmentActivity implements OnMapReadyCallbac
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if(id==R.id.action_map){
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+        if(id==R.id.action_map){
             Intent intent = new Intent(this,SelectedTrail.class);
             startActivity(intent);
         }
