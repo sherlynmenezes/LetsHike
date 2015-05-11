@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by Neha on 5/6/2015.
  */
 public class Photos_database extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 14;
+    private static final int DB_VERSION = 30;
     private static final String DB_NAME = "PhotosDB";
 
     private static final String PHOTOS = "Photos";

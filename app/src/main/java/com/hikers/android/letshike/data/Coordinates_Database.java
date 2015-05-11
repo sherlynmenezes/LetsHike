@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by Neha on 5/6/2015.
  */
 public class Coordinates_Database extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 14;
+    private static final int DB_VERSION = 23;
     private static final String DB_NAME = "Coordinates";
 
     private static final String COORDINATES = "coords";
@@ -59,7 +59,7 @@ public class Coordinates_Database extends SQLiteOpenHelper {
         String flag ="false";
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             int id = cursor.getInt(0);
-            coordinatesObjList.add(new Coordinates(cursor.getDouble(1),cursor.getDouble(2)));
+            coordinatesObjList.add(new Coordinates(id,cursor.getDouble(1),cursor.getDouble(2)));
             Log.v("LONGITUDE", "" + (cursor.getDouble(1)));
             Log.v("Latitude", ""+(cursor.getDouble(2)));
         }

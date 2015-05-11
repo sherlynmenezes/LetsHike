@@ -26,10 +26,10 @@ public class TripHistory extends ActionBarActivity{
         setContentView(R.layout.list_of_own_trails);
         mListView=(ListView)findViewById(R.id.listView);
         ArrayList<String> mTripTitles=new ArrayList<>();
-        mTripTitles.add("California trail");
-        mTripTitles.add("bayridge");
-        mTripTitles.add("queens");
-        mTripTitles.add("somethinsg");
+        mTripTitles.add("NYU Poly");
+        //mTripTitles.add("bayridge");
+        //mTripTitles.add("queens");
+       // mTripTitles.add("");
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mTripTitles);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

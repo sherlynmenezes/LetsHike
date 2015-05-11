@@ -41,14 +41,18 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Parse.enableLocalDatastore(this);
+       // Parse.enableLocalDatastore(this);
         ParseObject.registerSubclass(Trip.class);
         Parse.initialize(this, "Hw4MULqo65R0NHElRKs8ZMIEJjo8jHx8jUE3U31a", "zEMPRCWyMtGVhk477CKHz71rd2DtNlBTYciIiIXt");
 //        ParseUser.enableRevocableSessionInBackground();
         ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.put("longitude", 72.00033);
+        ParseObject testtest = new ParseObject("testtest");
+        testtest.put("dfsf","dsfsdf");
+        testtest.saveInBackground();
 
+        testObject.put("foo", "bar");
+        testObject.put("latitude", 72.00033);
+//
         testObject.saveInBackground();
 
         mSignUpButton = (Button)findViewById(R.id.SignUpButton);

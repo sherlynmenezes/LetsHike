@@ -45,12 +45,62 @@ import java.util.Date;
 /**
  * Created by sherlyn on 5/10/2015.
  */
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.media.ExifInterface;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.hikers.android.letshike.R;
+import com.hikers.android.letshike.data.Coordinates;
+import com.hikers.android.letshike.data.Coordinates_Database;
+import com.hikers.android.letshike.data.Photos;
+import com.hikers.android.letshike.data.Photos_database;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+/**
+ * Created by sherlyn on 5/10/2015.
+ */
 public class PhotoDisplay extends FragmentActivity implements
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    private static final String TAG = "LocationActivity";
+    private static final String TAG = "PhotoActivity";
     private static final long INTERVAL = 1000 * 60 * 5; //1 minute
     private static final long FASTEST_INTERVAL = 1000 * 60 * 5; // 1 minute
     Button btnFusedLocation;
@@ -91,7 +141,7 @@ public class PhotoDisplay extends FragmentActivity implements
                 .addOnConnectionFailedListener(this)
                 .build();
 
-        setContentView(R.layout.activity_main_offline_gps);
+        setContentView(R.layout.activity_photo_layout);
         SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         googleMap = fm.getMap();
@@ -174,41 +224,55 @@ public class PhotoDisplay extends FragmentActivity implements
         {
             LatLng currentLatLng = new LatLng(c.get_latitude(), c.get_longitude());
             // count++;
-            Log.v("long photo", ""+c.get_latitude()+c.get_longitude());
+            Log.v("long photo", "" + c.get_latitude() + c.get_longitude());
             options.position(currentLatLng);
             Marker mapMarker = googleMap.addMarker(options);
-            //   mapMarker.setTitle(Double.toString(c.get_latitude())+Double.toString(c.get_longitude()));
+            // byte[] image = c.get_Image();
+            //  ByteArrayInputStream imagestream =  new ByteArrayInputStream(image);
+
+            //Bitmap theimage = BitmapFactory.decodeStream(imagestream);
+//
+//
+            BitmapFactory.Options op = new BitmapFactory.Options();
+            op.inSampleSize = 2;
+            Bitmap theimage  = BitmapFactory.decodeFile(c.get_path(),op);
+            Bitmap bhalfsize=Bitmap.createScaledBitmap(theimage, theimage.getWidth()/10,theimage.getHeight()/10, false);
+            // mapMarker.setIcon(BitmapFactory.decodeByteArray(c.get_Image(),0,c.get_Image().length));
+
+            //     Drawable drawable = Drawable.createFromPath(c.get_path());
+            mapMarker.setIcon(BitmapDescriptorFactory.fromBitmap(bhalfsize));
+            mapMarker.setTitle(""+c.get_latitude()+" "+ c.get_longitude());
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 13));
             Polyline line = googleMap.addPolyline(new PolylineOptions().add(new LatLng(c.get_latitude(),c.get_longitude())));
         }
-        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-            @Override
-            public View getInfoWindow(Marker marker) {
-                return null;
-            }
-            //
-            @Override
-            public View getInfoContents(Marker marker) {
-                View v = getLayoutInflater().inflate(R.layout.geotag_info_window, null);
-//                ImageView iv = (ImageView) findViewById(R.id.badge);
-//                iv.setImageResource(R.drawable.flower);
-                // Getting the position from the marker
-                // LatLng latLng = marker.getPosition();
-                // Getting reference to the TextView to set latitude
-                // TextView tvLat = (TextView) v.findViewById(R.id.tv_lat);
-
-                // Getting reference to the TextView to set longitude
-                //TextView tvLng = (TextView) v.findViewById(R.id.tv_lng);
-
-                // Setting the latitude
-                // tvLat.setText("Latitude:" + latLng.latitude);
-
-                // Setting the longitude
-                // tvLng.setText("Longitude:"+ latLng.longitude);
-                return v;
+//        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+//            @Override
+//            public View getInfoWindow(Marker marker) {
 //                return null;
-            }
-        });
+//            }
+//            //
+//            @Override
+//            public View getInfoContents(Marker marker) {
+//                View v = getLayoutInflater().inflate(R.layout.geotag_info_window, null);
+////                ImageView iv = (ImageView) findViewById(R.id.badge);
+////                iv.setImageResource(R.drawable.flower);
+//                // Getting the position from the marker
+//                // LatLng latLng = marker.getPosition();
+//                // Getting reference to the TextView to set latitude
+//                // TextView tvLat = (TextView) v.findViewById(R.id.tv_lat);
+//
+//                // Getting reference to the TextView to set longitude
+//                //TextView tvLng = (TextView) v.findViewById(R.id.tv_lng);
+//
+//                // Setting the latitude
+//                // tvLat.setText("Latitude:" + latLng.latitude);
+//
+//                // Setting the longitude
+//                // tvLng.setText("Longitude:"+ latLng.longitude);
+//                return v;
+////                return null;
+//            }
+//        });
 
 
 
@@ -244,8 +308,4 @@ public class PhotoDisplay extends FragmentActivity implements
         }
     }
 
-
-
-
 }
-

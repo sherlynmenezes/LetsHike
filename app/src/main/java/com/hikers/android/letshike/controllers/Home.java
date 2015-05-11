@@ -67,10 +67,10 @@ public class Home extends ActionBarActivity implements Camera.PictureCallback{
         trail_list=(ListView)findViewById(R.id.listView2);
         ArrayList<String> trails=new ArrayList<String>();
         ArrayList<String> mTripTitles=new ArrayList<>();
-        mTripTitles.add("California trail");
-        mTripTitles.add("bayridge");
-        mTripTitles.add("queens");
-        mTripTitles.add("somethinsg");
+        mTripTitles.add("NYU Poly");
+        mTripTitles.add("Bayridge");
+        mTripTitles.add("Queens");
+        mTripTitles.add("Manhattan");
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mTripTitles);
         trail_list.setAdapter(adapter);

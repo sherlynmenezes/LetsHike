@@ -80,5 +80,5 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/loginButton"
         android:text="Save Login?"
-        android:textColor="#FFF" />
+         />
 </RelativeLayout>

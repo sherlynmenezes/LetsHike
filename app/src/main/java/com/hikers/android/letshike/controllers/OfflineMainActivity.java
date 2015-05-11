@@ -43,6 +43,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.hikers.android.letshike.R;
 import com.hikers.android.letshike.data.Coordinates;
 import com.hikers.android.letshike.data.Coordinates_Database;
+import com.parse.Parse;
+import com.parse.ParseObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -99,7 +101,7 @@ public class OfflineMainActivity extends FragmentActivity implements
     String mLastUpdateTime;
     GoogleMap googleMap;
     PedometerSensors pedo = new PedometerSensors();
-
+    ParseObject test1Object=new ParseObject("hell");
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(INTERVAL);
@@ -110,11 +112,16 @@ public class OfflineMainActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Parse.initialize(this, "Hw4MULqo65R0NHElRKs8ZMIEJjo8jHx8jUE3U31a", "zEMPRCWyMtGVhk477CKHz71rd2DtNlBTYciIiIXt");
+//
+//        ParseObject testObject = new ParseObject("TestObject");
+//        testObject.put("latitude", 787.545);
+        sum=0;
         setContentView(R.layout.activity_main_offline_gps);
         textView = (TextView) findViewById(R.id.steps_textview);
         Button bStop = (Button)findViewById(R.id.hike_stats);
-
+        ParseObject tObject = new ParseObject("coordinates");
+        tObject.put("sdsfds",454);
         startTime = new Time(Time.getCurrentTimezone());
         startTime.setToNow();
 
@@ -313,7 +320,7 @@ public class OfflineMainActivity extends FragmentActivity implements
         //Change
         Log.v("**** LATITUDE ****", Double.toString(mCurrentLocation.getLatitude()));
         Log.v("**** LONGITUDE ****", Double.toString(mCurrentLocation.getLongitude()));
-        Coordinates coord_latLong = new Coordinates(mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude());
+        Coordinates coord_latLong = new Coordinates(null,mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude());
         cd.insert_coord(coord_latLong);
         mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
         addMarker();
@@ -340,6 +347,12 @@ public class OfflineMainActivity extends FragmentActivity implements
             locA = new Location("LocA");
             locA.setLatitude(c.get_latitude());
             locA.setLongitude(c.get_longitude());
+
+            test1Object.put("Coord_id", c.get_id());
+            test1Object.put("latitude", c.get_latitude());
+            test1Object.put("longitude", c.get_longitude());
+            test1Object.saveInBackground();
+
             if(locB!=null)
                 distance = locA.distanceTo(locB);
             sum=sum+distance;

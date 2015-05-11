@@ -79,6 +79,8 @@
                   android:label="Trail_Details"/>
         <activity android:name=".controllers.PhotoSelectionActivity"
                   android:label="PhotoSelection"/>
+        <activity android:name=".controllers.PhotoDisplay"
+                  android:label="PhotoDisplay"/>
     </application>
 
 </manifest>

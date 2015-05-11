@@ -6,11 +6,17 @@ import android.support.v7.app.ActionBarActivity;
 public class Coordinates extends ActionBarActivity {
     Double longitude = null;
     Double latitude = null;
-    public Coordinates(Double d,Double dd){
+    Integer id = null;
+    public Coordinates( Integer id,Double d,Double dd){
         latitude=d;
         longitude=dd;
+        this.id = id;
     }
 
+    public Integer get_id()
+    {
+        return id;
+    }
 
 
     public void set_Longitude(Double longitude)
