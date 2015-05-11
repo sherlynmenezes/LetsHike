@@ -71,7 +71,15 @@
         </activity>
         <activity
             android:name=".controllers.LoadingScreen"
-            android:label="@string/title_activity_loading_screen" >
+            android:label="title_activity_loading_screen" >
+        </activity>
+        <activity
+            android:name=".controllers.PhotoSelectionActivity"
+            android:label="activity_photo_selection" >
+        </activity>
+        <activity
+            android:name=".controllers.PhotoDisplay"
+            android:label="geotag_info_window" >
         </activity>
     </application>
 

@@ -121,6 +121,15 @@ public class OfflineMainActivity extends FragmentActivity implements
         setContentView(R.layout.activity_main_offline_gps);
         textView = (TextView) findViewById(R.id.steps_textview);
 
+        Button photo = (Button)findViewById(R.id.photo);
+        photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OfflineMainActivity.this, PhotoSelectionActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Button bStop = (Button)findViewById(R.id.stop);
         bStop.setOnClickListener(new View.OnClickListener() {
             @Override
